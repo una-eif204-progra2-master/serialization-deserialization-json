@@ -3,7 +3,6 @@
 //
 
 #include "Person.h"
-
 #include <utility>
 
 Person::Person() = default;

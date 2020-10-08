@@ -21,21 +21,42 @@ void from_json(const json &_json, Person &_personData) {
     _personData.setName(_json.at("name").get<std::string>());
 }
 
-std::string serialize(std::vector<Person> _personData) {
-    json _json(_personData);
-    std::string jsonArray = _json.dump();
+string serialize(vector<Person> _personList) {
+    json _json(_personList);
+    string jsonArray = _json.dump();
     return jsonArray;
 }
 
+vector<Person> deserialize(string _data) {
+    json jsonData = json::parse(_data);
+    vector<Person> personList = jsonData;
+
+    return personList;
+}
+
+/**
+ * Example to Serializing JSON objects
+ * @return
+ */
 int main() {
-    std::vector<Person> personList;
+    vector<Person> personList;
     Person person1 = Person(1, "Mike");
     Person person2 = Person(2, "Carlos");
 
     personList.push_back(person1);
     personList.push_back(person2);
 
-    std::cout << "Hello, Universidad Nacional!" << std::endl;
-    std::cout << serialize(personList);
+    cout << "Serialización del Json" << endl;
+    cout << serialize(personList);
     // Serialization output: [{"id":1,"name":"Mike"},{"id":2,"name":"Carlos"}]
+
+    vector<Person> personListFromJson;
+
+
+    cout << "Deserialización del Json" << endl;
+    personListFromJson = deserialize(R"([{"id":1,"name":"Mike"},{"id":2,"name":"Carlos"}])");
+    for (const Person& person: personListFromJson) {
+        std::cout << person.getName() << std::endl;
+    }
+
 }
