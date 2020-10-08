@@ -52,11 +52,9 @@ int main() {
 
     vector<Person> personListFromJson;
 
-
-    cout << "Deserialización del Json" << endl;
+    cout << "\nDeserialización del Json" << endl;
     personListFromJson = deserialize(R"([{"id":1,"name":"Mike"},{"id":2,"name":"Carlos"}])");
     for (const Person& person: personListFromJson) {
         std::cout << person.getName() << std::endl;
     }
-
 }
