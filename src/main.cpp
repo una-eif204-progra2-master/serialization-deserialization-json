@@ -2,6 +2,8 @@
 // Created by Maikol Guzman on 9/28/20.
 //
 
+// https://github.com/nlohmann/json (Library to handle JSON)
+
 #include <../lib/nlohmann/json.hpp>
 #include <iostream>
 #include "Person.h"
@@ -9,6 +11,11 @@
 using namespace std;
 using nlohmann::json;
 
+/**
+ * Custom to_json method automatically called.
+ * @param _json the Json Object
+ * @param _person the Model
+ */
 void to_json(json &_json, const Person &_person) {
     _json = json{
             {"id",   _person.getId()},
@@ -16,17 +23,32 @@ void to_json(json &_json, const Person &_person) {
     };
 }
 
-void from_json(const json &_json, Person &_personData) {
-    _personData.setId(_json.at("id").get<int>());
-    _personData.setName(_json.at("name").get<std::string>());
+/**
+ * Custom from_json method automatically called.
+ * @param _json  the Json Object
+ * @param _person the Model
+ */
+void from_json(const json &_json, Person &_person) {
+    _person.setId(_json.at("id").get<int>());
+    _person.setName(_json.at("name").get<std::string>());
 }
 
+/**
+ * This method will serialize the vector
+ * @param _personList
+ * @return the string with the json array
+ */
 string serialize(vector<Person> _personList) {
     json _json(_personList);
     string jsonArray = _json.dump();
     return jsonArray;
 }
 
+/**
+ * This method deserialize the string to object
+ * @param _data the string json data
+ * @return the array of objects
+ */
 vector<Person> deserialize(string _data) {
     json jsonData = json::parse(_data);
     vector<Person> personList = jsonData;
@@ -36,7 +58,7 @@ vector<Person> deserialize(string _data) {
 
 /**
  * Example to Serializing JSON objects
- * @return
+ * @return null
  */
 int main() {
     vector<Person> personList;
@@ -52,9 +74,9 @@ int main() {
 
     vector<Person> personListFromJson;
 
-    cout << "\nDeserialización del Json" << endl;
+    cout << "\n\nDeserialización del Json" << endl;
     personListFromJson = deserialize(R"([{"id":1,"name":"Mike"},{"id":2,"name":"Carlos"}])");
     for (const Person& person: personListFromJson) {
-        std::cout << person.getName() << std::endl;
+        std::cout << person.toString() << std::endl;
     }
 }

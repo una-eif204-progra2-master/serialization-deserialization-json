@@ -24,6 +24,8 @@ public:
     const std::string &getName() const;
 
     void setName(const std::string &name);
+
+    virtual std::string toString() const; // virtual method
 };
 
 

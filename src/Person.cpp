@@ -4,6 +4,7 @@
 
 #include "Person.h"
 #include <utility>
+#include <sstream>
 
 Person::Person() = default;
 
@@ -23,4 +24,12 @@ const std::string &Person::getName() const {
 
 void Person::setName(const std::string &name) {
     Person::name = name;
+}
+
+std::string Person::toString() const {
+    std::ostringstream output;
+    output << "Person id: " << getId()
+           << ", Name: " << getName();
+
+    return output.str();
 }
