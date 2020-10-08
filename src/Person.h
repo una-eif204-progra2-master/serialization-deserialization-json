@@ -17,6 +17,8 @@ public:
 
     Person(int id, std::string name);
 
+    virtual ~Person();
+
     int getId() const;
 
     void setId(int id);

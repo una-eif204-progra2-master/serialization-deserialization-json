@@ -33,3 +33,5 @@ std::string Person::toString() const {
 
     return output.str();
 }
+
+Person::~Person() = default;
