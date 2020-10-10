@@ -39,8 +39,8 @@ void from_json(const json &_json, Person &_person) {
  * @return the string with the json array
  */
 string serialize(vector<Person> _personList) {
-    json _json(_personList);
-    string jsonArray = _json.dump();
+    json jsonData(_personList);
+    string jsonArray = jsonData.dump();
     return jsonArray;
 }
 
