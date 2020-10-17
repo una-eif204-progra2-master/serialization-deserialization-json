@@ -4,7 +4,6 @@
 
 // https://github.com/nlohmann/json (Library to handle JSON)
 
-#include <../lib/nlohmann/json.hpp>
 #include <iostream>
 #include "Person.h"
 #include "FileManager.h"
@@ -16,7 +15,6 @@ using namespace std;
  * @return null
  */
 int main() {
-    FileManager* fileManager;
     vector<Person> personList;
     Person person1 = Person(1, "Mike");
     Person person2 = Person(2, "Carlos");
